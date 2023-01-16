@@ -109,6 +109,7 @@ The top of the screen displays the last used configuration.
 ## 1. run m8c
 Runs the m8c software according to the configuration.
 Exiting the m8c software, will exit the **m8c_launcher**.
+If audioserver is set to pulse, a config.pulse.pa file is created for pulseaudio deamon.
 
 ## 2. M8 outputs
 Set the sound interface to output sound from the M8. 
