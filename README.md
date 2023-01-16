@@ -1,6 +1,9 @@
 README.md
 
+
 A launcher for the [M8 Headless Tracker](https://github.com/Dirtywave/M8HeadlessFirmware), based on [rg351_m8c](https://github.com/jasonporritt/rg351_m8c) to easily configure the M8 inputs and outputs, the cpu governor and audioserver.
+
+![](./images/interface.png)
 
 This launcher should work for Anbernic's rg353m and rg353 family. Instructions will focus on [ArkOS](https://github.com/christianhaitian/arkos).
 
