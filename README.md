@@ -133,6 +133,7 @@ Reset everything to default values.
 - In case of crash, `oga_controls` will not be killed. The result is that the D-pad control is chaotic in the emulationstation. If this happens, restart your console, or kill the process via ssh: `sudo pkill oga_controls`
 - Be sure to not start the console with the M8 connected. Otherwise, alsa will use it as the default output device, and you won't get any sounds in your other games. Simply restart the console without the teensy connected.
 - The console volume controls only work with alsa audioserver, and `Default` M8 outputs.
+- Exiting in m8c sample edition window, makes the console to be redirected to tty2. A forced redirection to tty1 is done to prevent to be stuck in tty2.
 
 
 

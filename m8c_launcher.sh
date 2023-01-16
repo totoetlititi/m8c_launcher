@@ -31,7 +31,7 @@ sudo /opt/wifi/oga_controls $(dirname -- "$0")/m8_launcher.sh rg552 &
 # MAIN VARIABLES
 ###################################################
 
-sink_default="rockchip,rk817-codec"
+sink_default="Default"
 source_default="rockchip,rk817-codec"
 m8_card_default="M8"
 audioserver_default="alsa"
@@ -53,12 +53,15 @@ sources_list=""
 
 function kill_everything {
 	echo m8c_launcher: cleaning all processes
+	# cleaning the screen, to leave a black scrren when m8c process stops
+	dialog --infobox " bye ...  " 0 0 2>&1 > /dev/tty1 
 	sudo pulseaudio -k
 	sudo pkill -f pulseaudio
 	sudo pkill oga_controls
 	sudo pkill alsaloop
-	sudo chvt 1
-	# exit 0
+	# force to go back to tty1...
+	sudo chvt 0
+	exit 0
 }
 
 function force_variables_to_default {
@@ -363,14 +366,14 @@ function run_m8c {
 
 		# if m8c process stops, kill everything
 		# if pulseaudio crash while m8c is running, restart pulseaudio
-		while :
+		while pgrep -x m8c > /dev/null
 		do 
-			m8c_process=$(ps aux|grep [m]8c)
-			if [ -z "$m8c_process" ] 
-			then
-				# kill_everything
-				break
-			fi
+			# m8c_process=$(ps aux|grep [m]8c)
+			# if [ -z "$m8c_process" ] 
+			# then
+			# 	kill_everything
+			# 	break
+			# fi
 			# check if pulse is alive, restart 
 			pulse_process=$(ps aux|grep [p]ulseaudio)
 			if [ -z "$pulse_process" ] 
@@ -416,14 +419,14 @@ function run_m8c {
 
 		# if m8c process stops, kill everything
 		# if alsaloop while and m8c is running, restart alsaloop
-		while :
+		while pgrep -x m8c > /dev/null
 		do 
-			m8c_process=$(ps aux|grep [m]8c)
-			if [ -z "$m8c_process" ] 
-			then
-				# kill_everything
-				break
-			fi
+			# m8c_process=$(ps aux|grep [m]8c)
+			# if [ -z "$m8c_process" ] 
+			# then
+			# 	kill_everything
+			# 	break
+			# fi
 			# check if 2 processes of alsaloop are alive
 			alsa_process=$(ps -ef | grep alsaloop | grep -v grep | wc -l) # thanks chatGPT...
 			if [[ $alsa_process < 2 ]] 
