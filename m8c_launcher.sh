@@ -79,7 +79,7 @@ function check_M8 {
 	echo m8c_launcher: check_M8
 	M8_is_present=0
 	M8_tmp=$(aplay -l | grep -e "M8" | cut -f 1 -d \]  | cut -f 2 -d \[)
-	while [[ ! "$M8_tmp" == "M8" ]] 
+	while [[ ! "$M8_tmp" == *M8* ]] 
 	do
 		dialog --no-label "exit" --yes-label "ok" --yesno "Connect the M8..." 0 0 2>&1 > /dev/tty1 
 		case $? in
